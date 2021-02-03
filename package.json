@@ -2,9 +2,11 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "description": "RSS aggregator",
-  "main": "index.js",
+  "private": "true",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack serve --open --env=dev",
+    "build": "webpack --mode development"
   },
   "repository": {
     "type": "git",
@@ -18,11 +20,18 @@
   },
   "homepage": "https://github.com/ruslanmsk/frontend-project-lvl3#readme",
   "dependencies": {
-    "bootstrap": "^4.6.0"
+    "bootstrap": "^4.6.0",
+    "lodash": "^4.17.20"
   },
   "devDependencies": {
+    "css-loader": "^5.0.1",
     "eslint": "^7.19.0",
     "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.22.1"
+    "eslint-plugin-import": "^2.22.1",
+    "html-webpack-plugin": "^5.0.0",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.20.1",
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2"
   }
 }
