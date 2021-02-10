@@ -1,12 +1,10 @@
 env:
   es6: true
-  node: true
+  browser: true
 extends:
   - airbnb-base
   # - plugin:jest/all
 globals:
-  window: true
-  document: true
   Atomics: readonly
   SharedArrayBuffer: readonly
 parserOptions:
@@ -14,5 +12,4 @@ parserOptions:
   sourceType: module
 ignorePatterns:
   - dist
-# rules:
-
+  
