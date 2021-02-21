@@ -1,5 +1,25 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import i18next from 'i18next';
 import get from './api/api';
+
+i18next.init({
+  fallbackLng: 'en',
+  lng: 'en',
+  debug: true,
+  resources: {
+    en: {
+      translation: {
+        validation: {
+          notValidUrl: 'Must be valid url',
+          rssExist: 'Rss already exists',
+        },
+        rssLoaded: 'Rss has been loaded',
+      },
+    },
+  },
+}).then((t) => {
+  // initialized and ready to go!
+});
 
 const form = document.querySelector('.rss-form');
 const input = form.querySelector('input');
@@ -27,17 +47,17 @@ form.addEventListener('submit', (event) => {
   const feedUrl = input.value;
 
   if (!input.validity.valid) {
-    setFeedback('Must be valid url');
+    setFeedback(i18next.t('validation.notValidUrl'));
     return;
   }
 
   if (feedsSet.has(feedUrl)) {
-    setFeedback('Rss already exists');
+    setFeedback(i18next.t('validation.rssExist'));
     return;
   }
 
   get().then((response) => {
-    setFeedback('Rss has been loaded', 'success');
+    setFeedback(i18next.t('rssLoaded'), 'success');
     input.value = '';
     const data = parseRSS(response.data);
 
