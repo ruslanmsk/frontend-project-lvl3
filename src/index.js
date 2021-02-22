@@ -1,3 +1,5 @@
+import jQuery from 'jquery';
+import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import i18next from 'i18next';
 import get from './api/api';
@@ -25,7 +27,7 @@ const form = document.querySelector('.rss-form');
 const input = form.querySelector('input');
 const feedback = document.querySelector('.feedback');
 
-const feedsSet = new Set();
+const feedsMap = new Map();
 
 function setFeedback(text, type = 'error') {
   feedback.textContent = text;
@@ -41,6 +43,13 @@ function setFeedback(text, type = 'error') {
   }
 }
 
+document.addEventListener('click', (event) => {
+  if ([...event.target.classList].includes('post-preview')) {
+    // $('#previewPost').modal();
+    document.getElementById('previewPost').modal();
+  }
+});
+
 form.addEventListener('submit', (event) => {
   event.preventDefault();
 
@@ -51,7 +60,7 @@ form.addEventListener('submit', (event) => {
     return;
   }
 
-  if (feedsSet.has(feedUrl)) {
+  if (feedsMap.has(feedUrl)) {
     setFeedback(i18next.t('validation.rssExist'));
     return;
   }
@@ -61,18 +70,31 @@ form.addEventListener('submit', (event) => {
     input.value = '';
     const data = parseRSS(response.data);
 
-    feedsSet.add(feedUrl);
+    feedsMap.set(feedUrl, data.posts.map((post) => post.guid));
 
     addFeeds(data);
+    setIntervalForRSS(feedUrl);
   });
 });
+
+function setIntervalForRSS(feedUrl) {
+  setTimeout(() => {
+    get().then((response) => {
+      const data = parseRSS(response.data);
+      const oldPostsGuid = feedsMap.get(feedUrl);
+      addPosts(data.posts.filter((post) => oldPostsGuid.includes(post.guid)));
+    }).finally(() => {
+      setIntervalForRSS(feedUrl);
+    });
+  }, 5000);
+}
 
 function addFeeds(data) {
   const feedsContainer = document.querySelector('.feeds-container');
   feedsContainer.style.display = 'block';
 
   addFeedRow(data);
-  addPosts(data);
+  addPosts(data.posts);
 }
 
 function addFeedRow(data) {
@@ -89,8 +111,8 @@ function addFeedRow(data) {
   feedsList.insertAdjacentHTML('beforeend', row);
 }
 
-function addPosts(data) {
-  data.posts.forEach((post) => {
+function addPosts(posts) {
+  posts.forEach((post) => {
     addPostRow(post);
   });
 }
@@ -109,6 +131,7 @@ function addPostRow(post) {
         rel="noopener noreferrer"
         >${post.title}
       </a>
+      <button type="button" class="btn btn-primary btn-sm" data-id="12" data-toggle="modal" data-target="#previewPost">Просмотр</button>
   </li>`;
 
   postsList.insertAdjacentHTML('beforeend', row);
@@ -133,3 +156,7 @@ function parseRSS(xml) {
   };
   return result;
 }
+
+jQuery('#previewPost').on('shown.bs.modal', () => {
+  alert('focus3');
+});
