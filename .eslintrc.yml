@@ -1,15 +1,20 @@
 env:
   es6: true
   browser: true
+
 extends:
   - airbnb-base
-  # - plugin:jest/all
-globals:
-  Atomics: readonly
-  SharedArrayBuffer: readonly
+  # - plugin:jest/recommended
+
 parserOptions:
   ecmaVersion: 2020
   sourceType: module
+
 ignorePatterns:
   - dist
+
+rules:
+  no-console: 0
+  no-param-reassign: 0
+  quote-props: ["error", "consistent"]
   

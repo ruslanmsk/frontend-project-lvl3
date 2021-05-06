@@ -28,29 +28,25 @@
         </div>
       </form>
       <p class="text-muted my-1">Example: https://ru.hexlet.io/lessons.rss</p>
-      <div style="display: none" class="feedback text-success">
-        Rss has been loaded
-      </div>
+      <div class="feedback"></div>
     </div>
   </div>
 </section>
 
-<section class="container-fluid p-5 feeds-container" style="display: none">
+<section class="container-fluid p-5 feeds-container">
   <div class="row">
     <div class="col-md-10 col-lg-8 mx-auto feeds">
-      <h2>Feeds</h2>
       <ul class="list-group mb-5 feeds-list"></ul>
     </div>
   </div>
   <div class="row">
     <div class="col-md-10 col-lg-8 mx-auto posts">
-      <h2>Posts</h2>
       <ul class="list-group posts-list"></ul>
     </div>
   </div>
 </section>
 
-<div class="modal fade" id="previewPost" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="previewPost" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -63,8 +59,8 @@
         ...
       </div>
       <div class="modal-footer">
+        <a href="" target="_blank" class="btn btn-primary full-post">Read full</a>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
