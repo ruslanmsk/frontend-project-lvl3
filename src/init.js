@@ -83,6 +83,7 @@ export default () => {
   const initState = {
     feeds: [],
     posts: [],
+    seenPosts: new Set(),
     loadingProcess: {
       status: 'idle',
       error: null,
@@ -94,9 +95,6 @@ export default () => {
     },
     modal: {
       postId: null,
-    },
-    ui: {
-      seenPosts: new Set(),
     },
   };
 
@@ -125,7 +123,7 @@ export default () => {
       const { id } = event.target.dataset;
       if (id) {
         watchedState.modal.postId = id;
-        watchedState.ui.seenPosts.add(id);
+        watchedState.seenPosts.add(id);
       }
     });
 
