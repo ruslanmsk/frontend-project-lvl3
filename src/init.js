@@ -83,7 +83,7 @@ export default () => {
   const initState = {
     feeds: [],
     posts: [],
-    seenPosts: new Set(),
+    viewedPosts: new Set(),
     loadingProcess: {
       status: 'idle',
       error: null,
@@ -123,7 +123,7 @@ export default () => {
       const { id } = event.target.dataset;
       if (id) {
         watchedState.modal.postId = id;
-        watchedState.seenPosts.add(id);
+        watchedState.viewedPosts.add(id);
       }
     });
 

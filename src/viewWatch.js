@@ -73,7 +73,7 @@ export default (elements, initState, i18next) => {
   };
 
   const renderPosts = (state) => {
-    const { posts, seenPosts } = state;
+    const { posts, viewedPosts } = state;
     const { postsBox } = elements;
     const fragment = document.createDocumentFragment();
     const postsTitle = document.createElement('h2');
@@ -88,7 +88,7 @@ export default (elements, initState, i18next) => {
       element.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-start');
       const link = document.createElement('a');
       link.setAttribute('href', post.link);
-      const className = seenPosts.has(post.id) ? 'font-weight-normal' : 'font-weight-bold';
+      const className = viewedPosts.has(post.id) ? 'font-weight-normal' : 'font-weight-bold';
       link.classList.add(className);
       link.dataset.id = post.id;
       link.textContent = post.title;
@@ -135,7 +135,7 @@ export default (elements, initState, i18next) => {
         renderLoadingStatus(initState);
         break;
       case 'posts':
-      case 'seenPosts':
+      case 'viewedPosts':
         renderPosts(initState);
         break;
       case 'modal.postId':
