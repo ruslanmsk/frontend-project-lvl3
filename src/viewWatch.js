@@ -115,9 +115,6 @@ export default (elements, initState, i18next) => {
   const renderModal = (state) => {
     const post = state.posts.find(({ id }) => id === state.modal.postId);
     const title = elements.modal.querySelector('.modal-title');
-    console.log(state.posts);
-    console.log(state.modal.postId);
-    console.log(document.body.innerHTML);
     const body = elements.modal.querySelector('.modal-body');
     const fullArticleBtn = elements.modal.querySelector('.full-post');
 

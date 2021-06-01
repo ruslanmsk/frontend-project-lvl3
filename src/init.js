@@ -28,9 +28,6 @@ function setIntervalForRSS(watchedState) {
       const posts = newPosts
         .filter((post) => !oldPosts.map((oldPost) => oldPost.title).includes(post.title))
         .map((post) => ({ ...post, id: uniqueId() }));
-      console.log('oldPosts', oldPosts);
-      console.log('newPosts', newPosts);
-      console.log('posts', posts);
       watchedState.posts.push(...posts);
     }));
 
@@ -46,7 +43,6 @@ function validateUrl(url, feeds) {
 }
 
 function loadRSS(watchedState, feedUrl) {
-  console.log('load RSS', feedUrl);
   watchedState.loadingProcess.status = 'loading';
 
   get(addProxy(feedUrl)).then((response) => {
@@ -128,7 +124,6 @@ export default () => {
     elements.postsBox.addEventListener('click', (event) => {
       const { id } = event.target.dataset;
       if (id) {
-        console.log('change modal post id to', id);
         watchedState.modal.postId = id;
         watchedState.ui.seenPosts.add(id);
       }
