@@ -30,7 +30,6 @@ export default (elements, initState, i18next) => {
         input.value = '';
         feedback.classList.add('text-success');
         feedback.textContent = i18next.t('success');
-        input.focus();
         break;
       case 'loading':
         submit.disabled = true;
