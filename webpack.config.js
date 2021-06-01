@@ -1,13 +1,15 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const mode = process.env.NODE_ENV || 'development';
+
 module.exports = {
   entry: './index.js',
   output: {
-    filename: 'index_bundle.js',
+    filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
   },
-  mode: 'development',
+  mode,
   devtool: 'inline-source-map',
   devServer: {
     contentBase: './dist',

@@ -7,8 +7,9 @@
   },
   "main": "src/init.js",
   "scripts": {
-    "start": "webpack serve --open --env=dev",
-    "build": "webpack --mode development",
+    "dev": "webpack serve --open --env=dev",
+    "start": "node server.js",
+    "build": "rm -rf dist && NODE_ENV=production webpack",
     "heroku-prebuild": "npm install"
   },
   "repository": {
@@ -25,11 +26,13 @@
   "dependencies": {
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
+    "express": "^4.17.1",
     "i18next": "^19.8.9",
     "jquery": "^3.5.1",
     "lodash": "^4.17.20",
     "on-change": "^3.0.0",
     "popper.js": "^1.16.1",
+    "webpack": "^5.38.1",
     "yup": "^0.32.9"
   },
   "devDependencies": {
@@ -41,7 +44,6 @@
     "node-sass": "^5.0.0",
     "sass-loader": "^11.0.1",
     "style-loader": "^2.0.0",
-    "webpack": "^5.36.2",
     "webpack-cli": "^4.5.0",
     "webpack-dev-server": "^3.11.2"
   }
