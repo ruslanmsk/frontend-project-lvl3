@@ -29,7 +29,7 @@ export default (elements, initState, i18next) => {
         input.removeAttribute('readonly');
         input.value = '';
         feedback.classList.add('text-success');
-        feedback.textContent = i18next.t('loading.success');
+        feedback.textContent = i18next.t('notification.success');
         input.focus();
         break;
       case 'loading':

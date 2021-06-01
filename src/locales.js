@@ -1,6 +1,9 @@
 const ru = {
   translation: {
-    loading: {
+    feeds: 'Фиды',
+    posts: 'Посты',
+    preview: 'Просмотр',
+    notification: {
       success: 'RSS успешно загружен',
     },
     errors: {
@@ -11,15 +14,15 @@ const ru = {
       network: 'Ошибка сети',
       unknown: 'Неизвестная ошибка. Что-то пошло не так.',
     },
-    feeds: 'Фиды',
-    posts: 'Посты',
-    preview: 'Просмотр',
   },
 };
 
 const en = {
   translation: {
-    loading: {
+    feeds: 'Feeds',
+    posts: 'Posts',
+    preview: 'Preview',
+    notification: {
       success: 'Rss has been loaded',
     },
     errors: {
@@ -30,9 +33,6 @@ const en = {
       network: 'Network error',
       unknown: 'Something went wrong',
     },
-    feeds: 'Feeds',
-    posts: 'Posts',
-    preview: 'Preview',
   },
 };
 
