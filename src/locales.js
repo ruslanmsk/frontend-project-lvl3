@@ -3,9 +3,7 @@ const ru = {
     feeds: 'Фиды',
     posts: 'Посты',
     preview: 'Просмотр',
-    notification: {
-      success: 'RSS успешно загружен',
-    },
+    success: 'RSS успешно загружен',
     errors: {
       exists: 'RSS уже существует',
       required: 'Не должно быть пустым',
@@ -22,9 +20,7 @@ const en = {
     feeds: 'Feeds',
     posts: 'Posts',
     preview: 'Preview',
-    notification: {
-      success: 'Rss has been loaded',
-    },
+    success: 'Rss has been loaded',
     errors: {
       exists: 'Rss already exists',
       required: 'Field required',
