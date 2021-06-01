@@ -6,7 +6,7 @@ export default function parseRSS(xml) {
     throw new Error('invalidRss');
   }
 
-  const result = {
+  return {
     title: doc.querySelector('channel > title').textContent,
     description: doc.querySelector('channel > description').textContent,
     link: doc.querySelector('channel > link').textContent,
@@ -19,5 +19,4 @@ export default function parseRSS(xml) {
     })),
 
   };
-  return result;
 }
