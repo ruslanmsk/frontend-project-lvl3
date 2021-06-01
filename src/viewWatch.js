@@ -1,7 +1,7 @@
 import onChange from 'on-change';
 
 export default (elements, initState, i18next) => {
-  const handleForm = (state) => {
+  const renderForm = (state) => {
     const { form: { valid, error } } = state;
     const { input, feedback } = elements;
     if (valid) {
@@ -13,7 +13,7 @@ export default (elements, initState, i18next) => {
     }
   };
 
-  const handleLoadingProcessStatus = (state) => {
+  const renderLoadingStatus = (state) => {
     const { loadingProcess } = state;
     const { submit, input, feedback } = elements;
 
@@ -44,7 +44,7 @@ export default (elements, initState, i18next) => {
     }
   };
 
-  const handleFeeds = (state) => {
+  const renderFeeds = (state) => {
     const { feeds } = state;
     const { feedsBox } = elements;
     const fragment = document.createDocumentFragment();
@@ -72,7 +72,7 @@ export default (elements, initState, i18next) => {
     feedsBox.appendChild(fragment);
   };
 
-  const handlePosts = (state) => {
+  const renderPosts = (state) => {
     const { posts, ui } = state;
     const { postsBox } = elements;
     const fragment = document.createDocumentFragment();
@@ -112,7 +112,7 @@ export default (elements, initState, i18next) => {
     postsBox.appendChild(fragment);
   };
 
-  const handleModal = (state) => {
+  const renderModal = (state) => {
     const post = state.posts.find(({ id }) => id === state.modal.postId);
     const title = elements.modal.querySelector('.modal-title');
     console.log(state.posts);
@@ -129,22 +129,20 @@ export default (elements, initState, i18next) => {
   const watchedState = onChange(initState, (path) => {
     switch (path) {
       case 'form':
-        handleForm(initState);
-        break;
-      case 'loadingProcess.status':
-        handleLoadingProcessStatus(initState);
+        renderForm(initState);
         break;
       case 'feeds':
-        handleFeeds(initState);
+        renderFeeds(initState);
+        break;
+      case 'loadingProcess.status':
+        renderLoadingStatus(initState);
         break;
       case 'posts':
-        handlePosts(initState);
+      case 'ui.seenPosts':
+        renderPosts(initState);
         break;
       case 'modal.postId':
-        handleModal(initState);
-        break;
-      case 'ui.seenPosts':
-        handlePosts(initState);
+        renderModal(initState);
         break;
       default:
         break;
