@@ -69,8 +69,8 @@ function loadRSS(watchedState, feedUrl) {
     };
   }).catch((error) => {
     switch (error.message) {
-      case 'noRss':
-        watchedState.loadingProcess.error = 'noRss';
+      case 'invalidRss':
+        watchedState.loadingProcess.error = 'invalidRss';
         break;
       case 'network':
         watchedState.loadingProcess.error = 'network';

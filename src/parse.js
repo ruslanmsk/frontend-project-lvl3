@@ -3,7 +3,7 @@ export default function parseRSS(xml) {
   const doc = domparser.parseFromString(xml, 'text/xml');
 
   if (doc.querySelector('parsererror')) {
-    throw new Error('noRss');
+    throw new Error('invalidRss');
   }
 
   const result = {

@@ -5,10 +5,10 @@ const ru = {
     preview: 'Просмотр',
     success: 'RSS успешно загружен',
     errors: {
-      exists: 'RSS уже существует',
+      rssExists: 'RSS уже существует',
       required: 'Не должно быть пустым',
-      notUrl: 'Ссылка должна быть валидным URL',
-      noRss: 'Ресурс не содержит валидный RSS',
+      invalidURL: 'Ссылка должна быть валидным URL',
+      invalidRss: 'Ресурс не содержит валидный RSS',
       network: 'Ошибка сети',
       unknown: 'Неизвестная ошибка. Что-то пошло не так.',
     },
@@ -22,10 +22,10 @@ const en = {
     preview: 'Preview',
     success: 'Rss has been loaded',
     errors: {
-      exists: 'Rss already exists',
+      rssExists: 'Rss already exists',
       required: 'Field required',
-      notUrl: 'Must be valid url',
-      noRss: 'This source doesn\'t contain valid rss',
+      invalidURL: 'Must be valid url',
+      invalidRss: 'This source doesn\'t contain valid rss',
       network: 'Network error',
       unknown: 'Something went wrong',
     },
@@ -34,11 +34,11 @@ const en = {
 
 export const yupLocale = {
   string: {
-    url: () => ({ key: 'notUrl' }),
+    url: () => ({ key: 'invalidURL' }),
   },
   mixed: {
     required: () => ({ key: 'required' }),
-    notOneOf: () => ({ key: 'exists' }),
+    notOneOf: () => ({ key: 'rssExists' }),
   },
 };
 
