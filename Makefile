@@ -9,3 +9,6 @@ lint:
 
 lint-fix:
 	npx eslint . --fix
+
+deploy:
+	git push heroku master
