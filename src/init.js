@@ -57,7 +57,7 @@ function loadRSS(watchedState, feedUrl) {
     watchedState.feeds.push(feed);
 
     watchedState.loadingProcess.error = null;
-    watchedState.loadingProcess.status = 'idle';
+    watchedState.loadingProcess.status = 'neutral';
     watchedState.form = {
       ...watchedState.form,
       status: 'filling',
@@ -86,7 +86,7 @@ export default () => {
     viewedPosts: new Set(),
     modalPostId: null,
     loadingProcess: {
-      status: 'idle',
+      status: 'neutral',
       error: null,
     },
     form: {

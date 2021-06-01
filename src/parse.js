@@ -17,6 +17,5 @@ export default function parseRSS(xml) {
       pubDate: item.querySelector('pubDate').textContent,
       description: item.querySelector('description').textContent,
     })),
-
   };
 }

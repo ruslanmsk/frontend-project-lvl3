@@ -24,7 +24,7 @@ export default (elements, initState, i18next) => {
         feedback.classList.add('text-danger');
         feedback.textContent = i18next.t([`errors.${loadingProcess.error}`, 'errors.unknown']);
         break;
-      case 'idle':
+      case 'neutral':
         submit.disabled = false;
         input.removeAttribute('readonly');
         input.value = '';
@@ -114,12 +114,14 @@ export default (elements, initState, i18next) => {
 
   const renderModal = (state) => {
     const post = state.posts.find(({ id }) => id === state.modalPostId);
-    const title = elements.modal.querySelector('.modal-title');
-    const body = elements.modal.querySelector('.modal-body');
-    const fullArticleBtn = elements.modal.querySelector('.full-post');
 
+    const title = elements.modal.querySelector('.modal-title');
     title.textContent = post.title;
+
+    const body = elements.modal.querySelector('.modal-body');
     body.textContent = post.description;
+
+    const fullArticleBtn = elements.modal.querySelector('.full-post');
     fullArticleBtn.href = post.link;
   };
 
