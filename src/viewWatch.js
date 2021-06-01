@@ -113,7 +113,7 @@ export default (elements, initState, i18next) => {
   };
 
   const renderModal = (state) => {
-    const post = state.posts.find(({ id }) => id === state.modal.postId);
+    const post = state.posts.find(({ id }) => id === state.modalPostId);
     const title = elements.modal.querySelector('.modal-title');
     const body = elements.modal.querySelector('.modal-body');
     const fullArticleBtn = elements.modal.querySelector('.full-post');
@@ -138,7 +138,7 @@ export default (elements, initState, i18next) => {
       case 'viewedPosts':
         renderPosts(initState);
         break;
-      case 'modal.postId':
+      case 'modalPostId':
         renderModal(initState);
         break;
       default:

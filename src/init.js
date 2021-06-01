@@ -84,6 +84,7 @@ export default () => {
     feeds: [],
     posts: [],
     viewedPosts: new Set(),
+    modalPostId: null,
     loadingProcess: {
       status: 'idle',
       error: null,
@@ -92,9 +93,6 @@ export default () => {
       error: null,
       status: 'filling',
       valid: false,
-    },
-    modal: {
-      postId: null,
     },
   };
 
@@ -122,7 +120,7 @@ export default () => {
     elements.postsBox.addEventListener('click', (event) => {
       const { id } = event.target.dataset;
       if (id) {
-        watchedState.modal.postId = id;
+        watchedState.modalPostId = id;
         watchedState.viewedPosts.add(id);
       }
     });
