@@ -1,7 +1,7 @@
 import 'bootstrap';
 import * as yup from 'yup';
+import axios from 'axios';
 import i18next from 'i18next';
-import get from './api';
 import parseRSS from './parse';
 import locales, { yupLocale } from './locales';
 import viewWatch from './viewWatch';
@@ -21,15 +21,16 @@ function addProxy(url) {
 
 function setIntervalForRSS(watchedState) {
   setTimeout(() => {
-    const promises = watchedState.feeds.map((feed) => get(addProxy(feed.url)).then((response) => {
-      const feedData = parseRSS(response.data.contents);
-      const newPosts = feedData.posts.map((item) => ({ ...item, channelId: feed.id }));
-      const oldPosts = watchedState.posts.filter((post) => post.channelId === feed.id);
-      const posts = newPosts
-        .filter((post) => !oldPosts.map((oldPost) => oldPost.title).includes(post.title))
-        .map((post) => ({ ...post, id: uniqueId() }));
-      watchedState.posts.push(...posts);
-    }));
+    const promises = watchedState.feeds.map((feed) => axios.get(addProxy(feed.url))
+      .then((response) => {
+        const feedData = parseRSS(response.data.contents);
+        const newPosts = feedData.items.map((item) => ({ ...item, channelId: feed.id }));
+        const oldPosts = watchedState.posts.filter((post) => post.channelId === feed.id);
+        const posts = newPosts
+          .filter((post) => !oldPosts.map((oldPost) => oldPost.title).includes(post.title))
+          .map((post) => ({ ...post, id: uniqueId() }));
+        watchedState.posts.push(...posts);
+      }));
 
     Promise.all(promises).then(() => {
       setIntervalForRSS(watchedState);
@@ -45,13 +46,13 @@ function validateUrl(url, feeds) {
 function loadRSS(watchedState, feedUrl) {
   watchedState.loadingProcess.status = 'loading';
 
-  get(addProxy(feedUrl)).then((response) => {
+  axios.get(addProxy(feedUrl)).then((response) => {
     const data = parseRSS(response.data.contents);
 
     const feed = {
       url: feedUrl, id: uniqueId(), title: data.title, description: data.description,
     };
-    const posts = data.posts.map((item) => ({ ...item, channelId: feed.id, id: uniqueId() }));
+    const posts = data.items.map((item) => ({ ...item, channelId: feed.id, id: uniqueId() }));
 
     watchedState.posts.push(...posts);
     watchedState.feeds.push(feed);
@@ -64,15 +65,12 @@ function loadRSS(watchedState, feedUrl) {
       error: null,
     };
   }).catch((error) => {
-    switch (error.message) {
-      case 'invalidRss':
-        watchedState.loadingProcess.error = 'invalidRss';
-        break;
-      case 'network':
-        watchedState.loadingProcess.error = 'network';
-        break;
-      default:
-        watchedState.loadingProcess.error = 'unknown';
+    if (error.isAxiosError) {
+      watchedState.loadingProcess.error = 'network';
+    } else if (error.isRssParsingError) {
+      watchedState.loadingProcess.error = 'invalidRss';
+    } else {
+      watchedState.loadingProcess.error = 'unknown';
     }
 
     watchedState.loadingProcess.status = 'failed';
