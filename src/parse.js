@@ -12,9 +12,7 @@ export default function parseRSS(xml) {
     link: doc.querySelector('channel > link').textContent,
     posts: Array.from(doc.querySelectorAll('item')).map((item) => ({
       title: item.querySelector('title').textContent,
-      guid: item.querySelector('guid').textContent,
       link: item.querySelector('link').textContent,
-      pubDate: item.querySelector('pubDate').textContent,
       description: item.querySelector('description').textContent,
     })),
   };

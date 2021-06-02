@@ -87,7 +87,7 @@ export default (elements, initState, i18next) => {
       element.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-start');
       const link = document.createElement('a');
       link.setAttribute('href', post.link);
-      const className = viewedPosts.has(post.id) ? 'font-weight-normal' : 'font-weight-bold';
+      const className = viewedPosts.has(post.id) ? 'fw-normal' : 'fw-bold';
       link.classList.add(className);
       link.dataset.id = post.id;
       link.textContent = post.title;
